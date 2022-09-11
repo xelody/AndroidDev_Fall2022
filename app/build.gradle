@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/peiyaoxin/Documents/NEU Courses/cs5520/keystore/classkeystore')
+            storePassword 'cs5520'
+            keyAlias 'first key'
+            keyPassword 'cs5520'
+        }
+    }
     compileSdk 32
 
     defaultConfig {
@@ -13,6 +21,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
