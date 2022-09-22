@@ -2,4 +2,10 @@
     <string name="app_name">NUMAD22Fa_PeiyaoXin</string>
     <string name="about_button">About Me</string>
     <string name="clicky_button">Clicky Clicky</string>
+    <string name="buttonA">A</string>
+    <string name="buttonB">B</string>
+    <string name="buttonC">C</string>
+    <string name="buttonD">D</string>
+    <string name="buttonE">E</string>
+    <string name="buttonF">F</string>
 </resources>
