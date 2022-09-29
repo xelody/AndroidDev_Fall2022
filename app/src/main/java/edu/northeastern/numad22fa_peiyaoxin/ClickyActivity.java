@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ClickyActivity extends AppCompatActivity {
 
@@ -21,7 +20,7 @@ public class ClickyActivity extends AppCompatActivity {
         Button btnE = findViewById(R.id.buttonE);
         Button btnF = findViewById(R.id.buttonF);
 
-        TextView pressedTV = (TextView)  findViewById(R.id.TV_Pressed);
+        TextView pressedTV = findViewById(R.id.TV_Pressed);
         String textString = pressedTV.getText().toString();
 
         btnA.setOnClickListener(view ->

@@ -9,5 +9,8 @@
     <string name="buttonE">E</string>
     <string name="buttonF">F</string>
     <string name="tv_pressed">Pressed: -</string>
+    <string name="about_name">Peiyao Xin</string>
+    <string name="about_email">xin.pe@northeastern.edu</string>
+
 
 </resources>
