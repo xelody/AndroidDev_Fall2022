@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button clickyBtn = findViewById(R.id.clicky_btn);
         Button aboutBtn = findViewById(R.id.about_btn);
+        Button linkCollectorBtn = findViewById(R.id.link_collector_btn);
 
         aboutBtn.setOnClickListener(view ->
                 startActivity(new Intent(MainActivity.this, AboutMeActivity.class)));
