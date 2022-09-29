@@ -25,5 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         clickyBtn.setOnClickListener(view ->
                 startActivity(new Intent(MainActivity.this, ClickyActivity.class)));
+
+        linkCollectorBtn.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, LinkCollectorActivity.class)));
  }
 }
