@@ -1,5 +1,7 @@
 package edu.northeastern.numad22fa_peiyaoxin;
 
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,5 +17,8 @@ public class LinkViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.name = itemView.findViewById(R.id.tv_link_name);
         this.URL = itemView.findViewById(R.id.tv_link_URL);
+
+        this.URL.setMovementMethod(LinkMovementMethod.getInstance());
+        this.URL.setText(Html.fromHtml(String.valueOf(this), Html.FROM_HTML_MODE_COMPACT));
     }
 }
