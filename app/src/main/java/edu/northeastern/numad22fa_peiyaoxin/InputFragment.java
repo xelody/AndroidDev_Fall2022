@@ -1,4 +1,5 @@
 package edu.northeastern.numad22fa_peiyaoxin;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,13 @@ public class InputFragment extends Fragment implements View.OnClickListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "inputName";
     private static final String ARG_PARAM2 = "inputURL";
+    private static final String TAG = "InputFragment";
+
+    public interface OnInputListener {
+        void sendInput(Link link);
+    }
+
+    public OnInputListener mOnInputListener;
 
     private String name;
     private String URL;
@@ -95,7 +104,7 @@ public class InputFragment extends Fragment implements View.OnClickListener{
             } else {
 //                Toast.makeText(getActivity(), name + " " + URL, Toast.LENGTH_LONG).show();
                 Link newLink = new Link(name, URL);
-
+                mOnInputListener.sendInput(newLink);
                 etName.setText("");
                 etURL.setText("");
                 hideFragment();
@@ -108,5 +117,15 @@ public class InputFragment extends Fragment implements View.OnClickListener{
         FragmentTransaction ft = manager.beginTransaction();
         ft.hide(this);
         ft.commit();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnInputListener = (OnInputListener) getActivity();
+        } catch (ClassCastException e) {
+            Log.e(TAG, "onAttach: ClassCastException: " + e.getMessage());
+        }
     }
 }

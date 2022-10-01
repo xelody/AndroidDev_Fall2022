@@ -1,10 +1,9 @@
 package edu.northeastern.numad22fa_peiyaoxin;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,14 +12,26 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkCollectorActivity extends AppCompatActivity implements View.OnClickListener{
+public class LinkCollectorActivity extends AppCompatActivity implements View.OnClickListener, InputFragment.OnInputListener{
     private static List<Link> linkList;
     private RecyclerView linkRecyclerView;
     private FloatingActionButton floatingActionButton;
+    private RecyclerView.Adapter adapter;
+    private Snackbar mySnackbar;
+
+
+    @Override
+    public void sendInput(Link link) {
+        linkList.add(link);
+        adapter.notifyDataSetChanged();
+        Snackbar.make(findViewById(R.id.myLinkCollectorLayout),
+                    "Successfully Created", Snackbar.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +41,10 @@ public class LinkCollectorActivity extends AppCompatActivity implements View.OnC
 
         linkList = new ArrayList<>();
 
-        linkList.add(new Link("John Doe", "www.google.com"));
-
         linkRecyclerView = findViewById(R.id.link_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this );
         linkRecyclerView.setLayoutManager(layoutManager);
-        LinkAdaptor adapter = new LinkAdaptor(linkList, this);
+        adapter = new LinkAdaptor(linkList, this);
         linkRecyclerView.setAdapter(adapter);
 
         floatingActionButton = findViewById(R.id.add_fab);
@@ -48,8 +57,10 @@ public class LinkCollectorActivity extends AppCompatActivity implements View.OnC
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();
             Fragment inputFragment = manager.findFragmentById(R.id.fragment_input);
-            ft.show(inputFragment);
-            ft.commit();
+            if (inputFragment != null) {
+                ft.show(inputFragment);
+                ft.commit();
+            }
             getSupportFragmentManager().executePendingTransactions();
 //            linkRecyclerView.setVisibility(View.GONE);
         }
@@ -59,8 +70,10 @@ public class LinkCollectorActivity extends AppCompatActivity implements View.OnC
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         Fragment inputFragment = manager.findFragmentById(R.id.fragment_input);
-        ft.hide(inputFragment);
-        ft.commit();
+        if (inputFragment != null) {
+            ft.hide(inputFragment);
+            ft.commit();
+        }
     }
 
     @Override
