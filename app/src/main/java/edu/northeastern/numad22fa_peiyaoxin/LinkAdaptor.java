@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LinkAdaptor extends RecyclerView.Adapter<LinkViewHolder> {
 
-    private final List<Link> link;
+    private final List<Link> linkList;
     private final Context context;
 
     /**
@@ -22,7 +22,7 @@ public class LinkAdaptor extends RecyclerView.Adapter<LinkViewHolder> {
      * @param context   context of the activity used for inflating layout of the viewholder.
      */
     public LinkAdaptor(List<Link> link, Context context) {
-        this.link = link;
+        this.linkList = link;
         this.context = context;
     }
 
@@ -34,15 +34,16 @@ public class LinkAdaptor extends RecyclerView.Adapter<LinkViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull LinkViewHolder holder, int position) {
-        holder.name.setText(link.get(position).getName());
-        holder.URL.setText(link.get(position).getURL());
+        holder.name.setText(linkList.get(position).getName());
+        holder.URL.setText(linkList.get(position).getURL());
 
         holder.itemView.setOnClickListener(view ->
-            Toast.makeText(context, link.get(position).getName(), Toast.LENGTH_SHORT).show());
+            Toast.makeText(context, linkList.get(position).getName(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
     public int getItemCount() {
-        return link.size();
+        return linkList.size();
     }
+
 }

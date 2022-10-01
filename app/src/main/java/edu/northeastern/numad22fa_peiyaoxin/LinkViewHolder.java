@@ -17,8 +17,5 @@ public class LinkViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.name = itemView.findViewById(R.id.tv_link_name);
         this.URL = itemView.findViewById(R.id.tv_link_URL);
-
-        this.URL.setMovementMethod(LinkMovementMethod.getInstance());
-        this.URL.setText(Html.fromHtml(String.valueOf(this), Html.FROM_HTML_MODE_COMPACT));
     }
 }

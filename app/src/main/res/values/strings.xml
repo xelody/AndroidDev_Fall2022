@@ -12,5 +12,8 @@
     <string name="about_name">Peiyao Xin</string>
     <string name="about_email">xin.pe@northeastern.edu</string>
     <string name="link_collector">Link Collector</string>
+    <string name="input_name">Name</string>
+    <string name="input_URL">Link</string>
+    <string name="submit">Submit</string>
 
 </resources>
