@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LinkAdaptor extends RecyclerView.Adapter<LinkViewHolder> {
@@ -44,6 +45,20 @@ public class LinkAdaptor extends RecyclerView.Adapter<LinkViewHolder> {
     @Override
     public int getItemCount() {
         return linkList.size();
+    }
+
+    public void removeLink(int position) {
+        linkList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreLink(Link link, int position) {
+        linkList.add(position, link);
+        notifyItemInserted(position);
+    }
+
+    public List<Link> getData() {
+        return linkList;
     }
 
 }

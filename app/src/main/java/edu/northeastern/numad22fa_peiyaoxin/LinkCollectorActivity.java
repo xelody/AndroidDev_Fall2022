@@ -1,15 +1,19 @@
 package edu.northeastern.numad22fa_peiyaoxin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -22,8 +26,7 @@ public class LinkCollectorActivity extends AppCompatActivity implements View.OnC
     private RecyclerView linkRecyclerView;
     private FloatingActionButton floatingActionButton;
     private RecyclerView.Adapter adapter;
-    private Snackbar mySnackbar;
-
+    private LinkAdaptor mAdapter;
 
     @Override
     public void sendInput(Link link) {
@@ -49,6 +52,63 @@ public class LinkCollectorActivity extends AppCompatActivity implements View.OnC
 
         floatingActionButton = findViewById(R.id.add_fab);
         floatingActionButton.setOnClickListener(this);
+
+        enableSwipeToDeleteAndUndo();
+
+//        ItemTouchHelper helper = new ItemTouchHelper(callback);
+//        helper.attachToRecyclerView(linkRecyclerView);
+    }
+
+    ItemTouchHelper.SimpleCallback callback =
+            new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView,
+                              @NonNull RecyclerView.ViewHolder viewHolder,
+                              @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            Snackbar.make(findViewById(R.id.myLinkCollectorLayout),
+                    "Link Deleted!", Snackbar.LENGTH_SHORT).show();
+
+            linkList.remove(viewHolder.getAdapterPosition());
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    private void enableSwipeToDeleteAndUndo() {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                final int position = viewHolder.getAdapterPosition();
+                final Link link = mAdapter.getData().get(position);
+
+                mAdapter.removeLink(position);
+
+
+                Snackbar snackbar = Snackbar
+                        .make(findViewById(R.id.myLinkCollectorLayout), "Item was removed from the list.", Snackbar.LENGTH_LONG);
+                snackbar.setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        mAdapter.restoreLink(link, position);
+                        linkRecyclerView.scrollToPosition(position);
+                    }
+                });
+
+                snackbar.setActionTextColor(Color.YELLOW);
+                snackbar.show();
+
+            }
+        };
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(callback);
+        itemTouchhelper.attachToRecyclerView(linkRecyclerView);
     }
 
     @Override
