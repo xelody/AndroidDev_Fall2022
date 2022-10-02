@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,11 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinkCollectorActivity extends AppCompatActivity implements View.OnClickListener, InputFragment.OnInputListener{
-    private static List<Link> linkList;
+    private ArrayList<Link> linkList;
     private RecyclerView linkRecyclerView;
     private FloatingActionButton floatingActionButton;
     private RecyclerView.Adapter adapter;
     private LinkAdaptor mAdapter;
+
 
     @Override
     public void sendInput(Link link) {
@@ -43,6 +45,9 @@ public class LinkCollectorActivity extends AppCompatActivity implements View.OnC
         hideFragment();
 
         linkList = new ArrayList<>();
+        if (savedInstanceState != null) {
+            linkList = savedInstanceState.getParcelableArrayList("links");
+        }
 
         linkRecyclerView = findViewById(R.id.link_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this );
@@ -54,9 +59,12 @@ public class LinkCollectorActivity extends AppCompatActivity implements View.OnC
         floatingActionButton.setOnClickListener(this);
 
         enableSwipeToDeleteAndUndo();
+    }
 
-//        ItemTouchHelper helper = new ItemTouchHelper(callback);
-//        helper.attachToRecyclerView(linkRecyclerView);
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelableArrayList("links", linkList);
+        super.onSaveInstanceState(outState);
     }
 
     ItemTouchHelper.SimpleCallback callback =

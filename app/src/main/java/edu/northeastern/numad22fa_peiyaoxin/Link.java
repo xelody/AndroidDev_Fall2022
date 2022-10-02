@@ -1,8 +1,11 @@
 package edu.northeastern.numad22fa_peiyaoxin;
 
-public class Link {
-    private final String name;
-    private final String URL;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Link implements Parcelable {
+    private String name;
+    private String URL;
 
     public Link(String name, String URL) {
         this.name = name;
@@ -15,5 +18,16 @@ public class Link {
 
     public String getURL() {
         return this.URL;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(URL);
     }
 }
