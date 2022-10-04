@@ -16,5 +16,7 @@
     <string name="input_URL">Link</string>
     <string name="submit">Submit</string>
     <string name="prime">Find Primes</string>
+    <string name="terminate_search">Terminate Search</string>
+    <string name="pacific_switch">Pacific Switch</string>
 
 </resources>
