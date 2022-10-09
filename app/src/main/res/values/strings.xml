@@ -18,5 +18,7 @@
     <string name="prime">Find Primes</string>
     <string name="terminate_search">Terminate Search</string>
     <string name="pacific_switch">Pacific Switch</string>
+    <string name="current_number">Current Number Being Checked</string>
+    <string name="prime_number">Latest Prime Number Found</string>
 
 </resources>
