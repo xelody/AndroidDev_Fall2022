@@ -7,7 +7,7 @@ android {
         release {
             storeFile file('/Users/peiyaoxin/Documents/NEU Courses/cs5520/keystore/classkeystore')
             storePassword 'cs5520'
-            keyAlias 'first key'
+            keyAlias 'my first key'
             keyPassword 'cs5520'
         }
     }
