@@ -99,12 +99,12 @@ public class FindPrimeActivity extends AppCompatActivity {
         @Override
         public void run() {
             int current = isInProgress ? currentNumber : DEFAULT_START;
+            int counter = 3;
             while(!Thread.currentThread().isInterrupted()) {
                 final int candidate = current;
                 final String candidateStr = String.valueOf(current);
                 textHandler.post(() -> {
                     isInProgress = true;
-                    currNumberText.setText(candidateStr);
                     currentNumber = candidate;
                     if (isPrime(candidate)) {
                         currPrimeText.setText(candidateStr);
@@ -116,14 +116,23 @@ public class FindPrimeActivity extends AppCompatActivity {
                 if (current >= Integer.MAX_VALUE - 1) {
                     current = 3;
                 }
-                try {
-                    Thread.sleep(250);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    textHandler.post(() -> {
-                        isInProgress = false;
-                    });
+                counter--;
+                if (counter == 0) {
+                    try {
+                        Thread.sleep(250);
+                        textHandler.post(() -> {
+                            isInProgress = true;
+                            currNumberText.setText(candidateStr);
+                        });
+                        counter = 3;
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        textHandler.post(() -> {
+                            isInProgress = false;
+                        });
+                    }
                 }
+
             }
         }
 
