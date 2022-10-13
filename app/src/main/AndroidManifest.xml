@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD22Fa_PeiyaoXin">
         <activity
+            android:name=".LocationActivity"
+            android:exported="false" />
+        <activity
             android:name=".FindPrimeActivity"
             android:exported="false" />
         <activity
