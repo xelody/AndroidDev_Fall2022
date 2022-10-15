@@ -53,7 +53,15 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
         getLocation();
 
-
+        Button btn_resetDistance = findViewById(R.id.btn_resetDistance);
+        btn_resetDistance.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                distance = 0;
+                firstTime = true;
+                TextView tvDistance = findViewById(R.id.tv_totalDistance);
+                tvDistance.setText("Total distance traveled: " + distance + " m");
+            }
+        });
 
     }
 
