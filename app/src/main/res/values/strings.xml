@@ -20,5 +20,10 @@
     <string name="pacific_switch">Pacific Switch</string>
     <string name="current_number">Current Number Being Checked</string>
     <string name="prime_number">Latest Prime Number Found</string>
+    <string name="location">Location</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
+    <string name="total_distance">Total Distance Traveled:</string>
+    <string name="reset_distance">Reset Total Distance</string>
 
 </resources>

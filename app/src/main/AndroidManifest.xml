@@ -3,6 +3,10 @@
     package="edu.northeastern.numad22fa_peiyaoxin">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_px_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD22Fa_PeiyaoXin">
+
         <activity
             android:name=".LocationActivity"
             android:exported="false" />
