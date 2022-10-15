@@ -44,7 +44,16 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
             }, 100);
         }
 
+        if (savedInstanceState != null) {
+            lastLatitude = savedInstanceState.getDouble("lastLatitude");
+            lastLongitude = savedInstanceState.getDouble("lastLongitude");
+            distance = savedInstanceState.getDouble("distance");
+            firstTime = savedInstanceState.getBoolean("firstTime");
+        }
+
         getLocation();
+
+
 
     }
 
