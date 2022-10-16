@@ -57,34 +57,12 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         btn_resetDistance.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 distance = 0;
-                firstTime = true;
                 TextView tvDistance = findViewById(R.id.tv_totalDistance);
-                tvDistance.setText("Total distance traveled: " + distance + " m");
+                tvDistance.setText("Total distance traveled: " + distance + " km");
             }
         });
 
     }
-
-//    private ActivityResultLauncher<String> requestPermissionLauncher =
-//            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-//                if (ContextCompat.checkSelfPermission(
-//                        CONTEXT, Manifest.permission.REQUESTED_PERMISSION) ==
-//                        PackageManager.PERMISSION_GRANTED) {
-//                    // You can use the API that requires the permission.
-//                    performAction(...);
-//                } else if (shouldShowRequestPermissionRationale(...)){
-//                    // In an educational UI, explain to the user why your app requires this
-//                    // permission for a specific feature to behave as expected. In this UI,
-//                    // include a "cancel" or "no thanks" button that allows the user to
-//                    // continue using your app without granting the permission.
-//                    showInContextUI(...);
-//                } else{
-//                    // You can directly ask for the permission.
-//                    // The registered ActivityResultCallback gets the result of this request.
-//                    requestPermissionLauncher.launch(
-//                            Manifest.permission.REQUESTED_PERMISSION);
-//                }
-//            });
 
     @SuppressLint("MissingPermission")
     private void getLocation() {
@@ -137,7 +115,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         distance += calculateDistance(location.getLatitude(), location.getLongitude(),
                                       lastLatitude, lastLongitude);
         TextView tvDistance = findViewById(R.id.tv_totalDistance);
-        tvDistance.setText("Total distance traveled: " + distance + " m");
+        tvDistance.setText("Total distance traveled: " + distance + " km");
 
         lastLatitude = location.getLatitude();
         TextView tvLatitude = findViewById(R.id.tv_latitude);
@@ -163,8 +141,8 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
                 + Math.cos(currentLatitude) * Math.cos(previousLatitude)
                 * Math.pow(Math.sin(longitudeDelta / 2),2);
 
-        double c = 2 * Math.asin(Math.sqrt(a));
-        double earthRadius = 6371 * 1000 /* km */;
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double earthRadius = 6371 /* km */;
 
         // calculate the result
         return(c * earthRadius);
