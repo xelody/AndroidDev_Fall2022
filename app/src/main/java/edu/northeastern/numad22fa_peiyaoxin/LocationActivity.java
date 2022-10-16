@@ -61,7 +61,6 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
                 tvDistance.setText("Total distance traveled: " + distance + " km");
             }
         });
-
     }
 
     @SuppressLint("MissingPermission")
@@ -115,7 +114,8 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         distance += calculateDistance(location.getLatitude(), location.getLongitude(),
                                       lastLatitude, lastLongitude);
         TextView tvDistance = findViewById(R.id.tv_totalDistance);
-        tvDistance.setText("Total distance traveled: " + distance + " km");
+        String newDistance = String.format("Total distance traveled %.5f km", distance);
+        tvDistance.setText(newDistance);
 
         lastLatitude = location.getLatitude();
         TextView tvLatitude = findViewById(R.id.tv_latitude);
